@@ -9,6 +9,9 @@ class DeleteFile():
     def remove(self):
         path = Path("./backup_files")
         
+        if not path.exists():
+            os.mkdir("./backup_files")
+
         files = [f.name for f in path.iterdir() if f.is_file()]
         files = pd.DataFrame(files, columns=['SW'])
         files["ip"] = files["SW"].str.split("-").str[1]
