@@ -15,7 +15,7 @@ class Switch:
             with sync_playwright() as p:
                 IP = self.ip
 
-                navegador = p.chromium.launch(headless=True)
+                navegador = p.chromium.launch(headless=False)
                 pagina = navegador.new_page()
                 url = f"http://{IP}"            
 
