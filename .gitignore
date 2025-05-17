@@ -1,4 +1,4 @@
 /.envSW
 /data/
-/__pycache__/
-/utils/__pycache__/
+/**pycache**/
+/utils/**pycache**/
