@@ -5,6 +5,9 @@ import md_x1052
 from utils.deleteFiles import DeleteFile
 
 def main():
+    if not os.path.exists(r".\data"):
+        os.mkdir(r".\data")
+
     path = r".\data\switches.xlsx"
     # Criar o arquivo, caso não exista
     if not os.path.exists(path):
