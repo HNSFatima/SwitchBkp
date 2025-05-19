@@ -4,3 +4,4 @@
 /utils/**pycache**/
 /backup_files/
 /.venv
+/logs
