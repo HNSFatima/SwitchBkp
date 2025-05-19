@@ -1,6 +1,6 @@
 from netmiko import ConnectHandler
 
-from utils import getFileName
+from utils import getFileName, logger as log
 
 
 class Switch:
@@ -11,7 +11,7 @@ class Switch:
         self.password = password
     
     def run(self):
-        
+        logs = log.Logger()
 
         # Dados do switch Dell
         switch = {
@@ -22,7 +22,7 @@ class Switch:
         }
         try:
             print(f"⏳ Conectando ao switch Dell {self.model} - {switch["ip"]}...", end="\r",flush=True)
-            conexao = ConnectHandler(**switch)            
+            conexao = ConnectHandler(**switch)
             
             file_name = getFileName.GetFileName(switch["ip"]).get()
            
@@ -33,10 +33,11 @@ class Switch:
                 f.write(configuracao)
 
             print(f"✅ Configuração obtida e salva em {file_name}")
-            # conexao.disconnect()
+            logs.info(f"Conexão com switch {self.ip} foi bem sucessida. Log salvo em {file_name}")
 
         except Exception as e:
             print(f"❌ Erro ao conectar ao switch: {e}")
+            logs.erro(f"Erro ao conectar ao switch{self.ip}. Erro: {e}")
         finally:
             conexao.disconnect()
         

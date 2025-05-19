@@ -3,28 +3,28 @@ import os
 
 class Logger:
     def __init__(self):        
-        self.type = type
+        self.path = r".\logs"        
+        if not os.path.exists(self.path):
+            os.mkdir(self.path)
 
-        path = r"..\logs"
-        if not os.path.exists(path):
-            os.mkdir(path)
+        self.logger = logging.getLogger('switch')        
 
         logging.basicConfig(
             filename= self.path + rf'\logs.log',
-            level=logging.DEBUG,
+            level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
             datefmt='%Y-%m-%d %H:%M:%S'
         )
-        self.logger = logging.getLogger('switch')
+
+        logging.getLogger("paramiko").setLevel(logging.CRITICAL)
+        logging.getLogger("asyncio").setLevel(logging.CRITICAL)
+        logging.getLogger("urllib3").setLevel(logging.CRITICAL)
 
     def info(self, msg:str):
-        self.message = f'💡 {msg}'
-        self.logger.info(msg)
+        self.logger.info(f"{msg}")
 
     def erro(self, msg:str):
-        self.message = f'❌ {msg}'
-        self.logger.error(msg)
+        self.logger.info(f"{msg}")
 
     def warning(self, msg:str):
-        self.message = f"⚠️ {msg}"
-        self.logger.warning(msg)
+        self.logger.info(f"{msg}")

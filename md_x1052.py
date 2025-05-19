@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 
-from utils import getFileName
+from utils import getFileName,logger as log
 
 class Switch:
     def __init__(self, model:str, ip:str, user:str, password:str):
@@ -10,11 +10,11 @@ class Switch:
         self.password = password
     
     def run(self):
+        logs = log.Logger()
         print(f"⏳ Conectando ao switch Dell {self.model} - {self.ip}...", end="\r",flush=True)
         try:
             with sync_playwright() as p:
                 IP = self.ip
-
                 navegador = p.chromium.launch(headless=False)
                 pagina = navegador.new_page()
                 url = f"http://{IP}"            
@@ -56,6 +56,8 @@ class Switch:
 
                 #aguarda download
                 print(f"✅ Configuração obtida e salva em {file_name}")
+                logs.info(f"Conexão com switch {IP} foi bem sucessida. Log salvo em {file_name}")
                 pagina.wait_for_timeout(1000)
         except Exception as e:
             print(f"❌ Erro ao conectar ao switch: {e}")
+            logs.erro(f"Erro ao conectar ao switch{IP}. Erro: {e}")

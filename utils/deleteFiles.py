@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from pathlib import Path
+from utils import logger as log
 
 class DeleteFile():
     def __init__(self):        
@@ -29,5 +30,6 @@ class DeleteFile():
             for f in sw:
                 file = path.joinpath(f)
                 os.remove(file)
-
-        print("Arquivos Removidos")
+        if len(grouped.index) > 0:
+            logs = log.Logger()
+            logs.info("Os arquivos antigos de backup foram removidos")
