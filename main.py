@@ -30,7 +30,9 @@ def main():
         pwd = str( row["Senha"])
         
         if model == "X1052":
-            md_x1052.Switch(model=model, ip=ip, user=user, password=pwd).run()
+            # md_x1052.Switch(model=model, ip=ip, user=user, password=pwd).run()
+            
+            pass
         elif model == "2824":
             # print(model,index, "teste2")
             pass
