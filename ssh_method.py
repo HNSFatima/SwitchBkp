@@ -1,6 +1,6 @@
 from netmiko import ConnectHandler
 
-from utils import getFileName, logger as log
+from utils import getFileName, logger as log, sendMail
 
 
 class Switch:
@@ -38,6 +38,7 @@ class Switch:
         except Exception as e:
             print(f"❌ Erro ao conectar ao switch: {e}")
             logs.erro(f"Erro ao conectar ao switch{self.ip}. Erro: {e}")
+            sendMail.mail(f"Erro ao conectar ao switch{self.ip}. Erro: {e}","Erro")
         finally:
             conexao.disconnect()
         

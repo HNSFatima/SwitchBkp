@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import ssh_method as ssh
 import md_x1052
-from utils import logger as log
+from utils import logger as log, sendMail
 from utils.deleteFiles import DeleteFile
 
 def main():
@@ -16,6 +16,7 @@ def main():
         sheet.to_excel(path,index=False)
         print(fr"⚠️  Preencha o arquivo {path}")
         logs.erro(fr"Execução não realizada. Preencha o arquivo {path}")
+        sendMail.mail(fr"Execução não realizada. Preencha o arquivo {path}","Erro")
         return
 
     file = pd.read_excel(path)
@@ -24,6 +25,7 @@ def main():
     if len(file.index) <= 0:
         print(fr"⚠️  Preencha o arquivo {path}")
         logs.erro(fr"Execução não realizada. Preencha o arquivo {path}")
+        sendMail.mail(fr"Execução não realizada. Preencha o arquivo {path}","Erro")
         return
 
     logs.info("Execução Iniciada")

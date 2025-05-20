@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 
-from utils import getFileName,logger as log
+from utils import getFileName,logger as log, sendMail
 
 class Switch:
     def __init__(self, model:str, ip:str, user:str, password:str):
@@ -61,3 +61,4 @@ class Switch:
         except Exception as e:
             print(f"❌ Erro ao conectar ao switch: {e}")
             logs.erro(f"Erro ao conectar ao switch{IP}. Erro: {e}")
+            sendMail.mail(f"Erro ao conectar ao switch{IP}. Erro: {e}","Erro")
