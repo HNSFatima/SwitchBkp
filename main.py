@@ -44,6 +44,7 @@ def main():
         
     DeleteFile().remove()
     logs.info("Execução finalizada")
+    sendMail.mail(f"Backup realizado com sucesso","Realização Backup")
     
 
 
