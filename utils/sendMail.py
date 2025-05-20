@@ -3,9 +3,8 @@ from email.mime.text import MIMEText
 
 class mail:
     def __init__(self, msg:str, assunto:str):
-        pass
         remetente = 'suporte2.tasy@hnsf.com.br'
-        destinatario = 'suporte2.tasy@hnsf.com.br'
+        destinatario = 'suporte.ti@hnsf.com.br'
         
         mail = MIMEText(msg)
         mail['Subject'] = assunto
