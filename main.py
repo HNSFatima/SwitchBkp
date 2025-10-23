@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import S3148
 import ssh_method as ssh
 import md_x1052
 from utils import logger as log, sendMail
@@ -40,7 +41,7 @@ def main():
         elif model == "2824":
             logs.warning("Não há suporte para o switch Dell 2824")
         elif (model == "S3148") :
-            ssh.Switch(model=model, ip=ip, user=user, password=pwd).run()
+            S3148.Switch(model=model, ip=ip, user=user, password=pwd).run()
         
     DeleteFile().remove()
     logs.info("Execução finalizada")
